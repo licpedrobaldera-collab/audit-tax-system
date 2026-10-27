@@ -1,0 +1,3 @@
+export default function Dir(){
+ return <div style={{padding:20}}><h2>DIRECTORIO FIRMAS POR ESTADO</h2><h3>🗽 NY - 5 Firmas</h3><div style={{border:'1px solid #ddd',padding:15,background:'white',borderRadius:8}}><b>CPA-NY-12345 | Pedro Baldera CPA | Lic 12345 PTIN P123</b><br/>📧 pedro.cpa.ny@email.com | 📞 +1-917 | 🏦 Chase ****1234 Verificado | 45 casos $2025<br/><button>Ver Casos</button> <button>Email</button> <button>WhatsApp</button> <button>Asignar</button></div><h3>☀️ FL - 3 Firmas</h3><div style={{border:'1px solid #ddd',padding:15,background:'white'}}>CPA-FL-88901 Ana Martinez ana@fl.com BHD ****8842 12 aprobados</div></div>
+}
