@@ -1,0 +1,62 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "sqlite" url = env("DATABASE_URL") }
+
+model User {
+  id String @id @default(cuid())
+  rol String
+  email String? @unique
+  telefono String? @unique
+  identificacion String? @unique
+  claveHash String
+  nombre String
+  estado String?
+  codigoCPA String? @unique
+  licencia String?
+  ptin String?
+  bancoNombre String?
+  bancoNumero String?
+  bancoRouting String?
+  bancoTitular String?
+  activo Boolean @default(true)
+  createdAt DateTime @default(now())
+  casosCliente TaxCase[] @relation("ClienteUser")
+  casosCPA TaxCase[] @relation("CPAUser")
+  pagos PagoComision[]
+}
+
+model TaxCase {
+  id String @id @default(cuid())
+  casoNumero String @unique
+  estado String
+  clienteUserId String?
+  clienteUser User? @relation("ClienteUser", fields: [clienteUserId], references: [id])
+  cpaUserId String?
+  cpaUser User? @relation("CPAUser", fields: [cpaUserId], references: [id])
+  clienteNombre String
+  clienteEmail String
+  clienteData Json
+  montoCobrado Float @default(150)
+  clienteFirma Json?
+  cpaFirma Json?
+  contratoUrl String?
+  contratoStatus String @default("PENDIENTE")
+  status String @default("REALIZADA")
+  comisionStatus String @default("PENDIENTE")
+  comisionMonto Float @default(45)
+  carpetaPath String
+  soportes Json?
+  historial Json?
+  createdAt DateTime @default(now())
+}
+
+model PagoComision {
+  id String @id @default(cuid())
+  cpaId String
+  cpa User @relation(fields: [cpaId], references: [id])
+  monto Float
+  casosIncluidos Json
+  metodoPago String
+  comprobanteUrl String?
+  fechaPago DateTime @default(now())
+  estado String @default("PAGADO")
+}
